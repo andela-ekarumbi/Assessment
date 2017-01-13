@@ -39,7 +39,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.VH> {
 
     @Override
     public void onBindViewHolder(VH holder, int position) {
-
+        holder.bindBookDetails(books.get(position));
     }
 
     @Override
@@ -53,12 +53,24 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.VH> {
 
         TextView bookAuthor;
 
+        Book book;
+
         public VH(View itemView) {
             super(itemView);
             bookTitle = (TextView) itemView.findViewById(R.id.book_title);
             bookAuthor = (TextView) itemView.findViewById(R.id.book_author);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClicked(book);
+                }
+            });
         }
 
-        //void bind
+        void bindBookDetails(Book book) {
+            this.book = book;
+            bookTitle.setText(book.getTitle());
+            bookAuthor.setText(book.getAuthor());
+        }
     }
 }

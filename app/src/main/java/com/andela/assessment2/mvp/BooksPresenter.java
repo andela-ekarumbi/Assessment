@@ -14,27 +14,30 @@ public class BooksPresenter implements Mvp.PresenterActions {
 
     private Mvp.ViewAction viewAction;
 
-    public BooksPresenter(Mvp.ModelActions modelActions) {
+    public void setModelActions(Mvp.ModelActions modelActions) {
         this.modelActions = modelActions;
     }
 
-    public BooksPresenter(Mvp.ModelActions modelActions, Mvp.ViewAction viewAction) {
-        this.modelActions = modelActions;
+    public BooksPresenter(Mvp.ViewAction viewAction) {
+
         this.viewAction = viewAction;
     }
 
     @Override
     public void getBestSellerList() {
+        viewAction.showProgressDialog();
         modelActions.loadBestSellerList();
     }
 
     @Override
     public void showBestSellerList(List<Book> books) {
+        viewAction.hideProgressDialog();
         viewAction.displayBookList(books);
     }
 
     @Override
     public void showErrorMessage(String message) {
+        viewAction.hideProgressDialog();
         viewAction.displayErrorMessage(message);
     }
 }

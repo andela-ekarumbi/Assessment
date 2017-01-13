@@ -1,11 +1,8 @@
 package com.andela.assessment2.mvp;
 
 import com.andela.assessment2.model.Book;
-import com.andela.assessment2.model.BookListResult;
 
 import java.util.List;
-
-import retrofit2.Callback;
 
 /**
  * Created by Eston on 13/01/2017.
@@ -29,6 +26,8 @@ public interface Mvp {
         void showBestSellerList(List<Book> books);
 
         void showErrorMessage(String message);
+
+        void setModelActions(Mvp.ModelActions modelActions);
     }
 
     interface ModelActions {

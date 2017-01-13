@@ -29,7 +29,7 @@ public class Book {
     private String contributorNote;
     @SerializedName("price")
     @Expose
-    private Integer price;
+    private double price;
     @SerializedName("age_group")
     @Expose
     private String ageGroup;
@@ -86,11 +86,11 @@ public class Book {
         this.contributorNote = contributorNote;
     }
 
-    public Integer getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

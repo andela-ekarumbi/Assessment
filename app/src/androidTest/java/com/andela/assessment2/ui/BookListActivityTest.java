@@ -3,6 +3,7 @@ package com.andela.assessment2.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.intent.Intents;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -11,6 +12,7 @@ import com.andela.assessment2.R;
 import com.andela.assessment2.RecyclerViewMatcher;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -23,7 +25,10 @@ import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.intent.Intents.intended;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.*;
@@ -37,6 +42,7 @@ import static org.junit.Assert.*;
 
 public class BookListActivityTest {
 
+    @Rule
     public ActivityTestRule<BookListActivity> testRule
             = new ActivityTestRule<>(BookListActivity.class);
 
@@ -61,6 +67,13 @@ public class BookListActivityTest {
                 .check(matches(hasDescendant(withText("\"I GIVE YOU MY BODY ...\""))));
         onView(withRecyclerView(R.id.recycler).atPosition(1))
                 .check(matches(hasDescendant(withText("\"MOST BLESSED OF THE PATRIARCHS\""))));
+        onView(withRecyclerView(R.id.recycler).atPosition(2))
+                .check(matches(hasDescendant(withText("#ASKGARYVEE"))));
+        Intents.init();
+        onView(withRecyclerView(R.id.recycler).atPosition(0))
+                .perform(click());
+        intended(hasComponent(BookDetailActivity.class.getCanonicalName()));
+        Intents.release();
     }
 
     private String getTestJson() throws Exception {
