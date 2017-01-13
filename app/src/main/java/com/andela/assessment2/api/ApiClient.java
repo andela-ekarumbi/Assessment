@@ -17,6 +17,6 @@ public class ApiClient {
     }
 
     public void getBestSellerHistoryList(Callback<BookListResult> callback) {
-        
+
     }
 }
