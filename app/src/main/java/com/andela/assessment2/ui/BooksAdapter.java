@@ -59,6 +59,6 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.VH> {
             bookAuthor = (TextView) itemView.findViewById(R.id.book_author);
         }
 
-        void bind
+        //void bind
     }
 }
