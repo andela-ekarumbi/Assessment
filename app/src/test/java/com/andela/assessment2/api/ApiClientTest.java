@@ -42,6 +42,7 @@ public class ApiClientTest {
 
     @Test
     public void testGetBestSellerHistoryList() throws Exception {
+        ApiClient.API_BASE = mockWebServer.url("/").toString();
         new ApiClient().getBestSellerHistoryList(new Callback<BookListResult>() {
             @Override
             public void onResponse(Call<BookListResult> call, Response<BookListResult> response) {
